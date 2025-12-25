@@ -4,7 +4,7 @@ import { Inngest } from "inngest";
 export const inngest = new Inngest({ id: "project-management" });
 
 //ingest function to save user data to a database
-const syncUserCreation = inngest.creatFunction(
+const syncUserCreation = inngest.createFunction(
     {id: 'sync-user-from-clerk'},
     {event: 'clerk/user.created'},
     async({event}) => {
@@ -21,7 +21,7 @@ const syncUserCreation = inngest.creatFunction(
 )
 
 //Inngest function to delete user from database
-const syncUserDeletion = inngest.creatFunction(
+const syncUserDeletion = inngest.createFunction(
     {id: 'delete-user-with-clerk'},
     {event: 'clerk/user.deleted'},
     async({event}) => {
@@ -36,7 +36,7 @@ const syncUserDeletion = inngest.creatFunction(
 )
 
 //Inngest function to update user data in database
-const syncUserUpdation = inngest.creatFunction(
+const syncUserUpdation = inngest.createFunction(
     {id: 'update-user-from-clerk'},
     {event: 'clerk/user.updated'},
     async({event}) => {
