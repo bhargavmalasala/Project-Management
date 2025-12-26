@@ -121,6 +121,33 @@ const syncWorkspaceMemberCreation = inngest.createFunction(
   { event: "clerk/organizationInvitation.accepted" },
   async ({ event }) => {
     const { data } = event;
+    
+    // Ensure user exists in database before creating workspace member
+    const existingUser = await prisma.user.findUnique({
+      where: { id: data.user_id }
+    });
+    
+    if (!existingUser) {
+      console.log(`User ${data.user_id} not found in database. Waiting for sync...`);
+      // Return early - the user should be synced via clerk/user.created event
+      return;
+    }
+    
+    // Check if member already exists
+    const existingMember = await prisma.workspaceMember.findUnique({
+      where: {
+        userId_workspaceId: {
+          userId: data.user_id,
+          workspaceId: data.organization_id
+        }
+      }
+    });
+    
+    if (existingMember) {
+      console.log(`Member ${data.user_id} already exists in workspace ${data.organization_id}`);
+      return;
+    }
+    
     await prisma.workspaceMember.create({
       data: {
         userId: data.user_id,

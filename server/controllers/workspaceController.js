@@ -49,7 +49,7 @@ export const addMember = async (req, res) => {
         }
 
         //fetch workspace
-        const workspace = await primsa.workspace.findUnique({
+        const workspace = await prisma.workspace.findUnique({
             where: {id: workspaceId}, include: {members: true}
         })
 
