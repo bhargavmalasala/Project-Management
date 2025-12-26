@@ -2,6 +2,14 @@ import { Inngest, step } from "inngest";
 import prisma from "../configs/prisma.js";
 import sendEmail from "../configs/nodemailer.js";
 
+// Maps a Clerk role string to the Prisma WorkspaceRole enum; defaults to MEMBER.
+const normalizeWorkspaceRole = (roleName) => {
+  if (!roleName) return "MEMBER";
+  const value = String(roleName).toUpperCase();
+  if (value.includes("ADMIN") || value.includes("OWNER")) return "ADMIN";
+  return "MEMBER";
+};
+
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "project-management" });
 
@@ -121,38 +129,42 @@ const syncWorkspaceMemberCreation = inngest.createFunction(
   { event: "clerk/organizationInvitation.accepted" },
   async ({ event }) => {
     const { data } = event;
-    
+
     // Ensure user exists in database before creating workspace member
     const existingUser = await prisma.user.findUnique({
-      where: { id: data.user_id }
+      where: { id: data.user_id },
     });
-    
+
     if (!existingUser) {
-      console.log(`User ${data.user_id} not found in database. Waiting for sync...`);
+      console.log(
+        `User ${data.user_id} not found in database. Waiting for sync...`
+      );
       // Return early - the user should be synced via clerk/user.created event
       return;
     }
-    
+
     // Check if member already exists
     const existingMember = await prisma.workspaceMember.findUnique({
       where: {
         userId_workspaceId: {
           userId: data.user_id,
-          workspaceId: data.organization_id
-        }
-      }
+          workspaceId: data.organization_id,
+        },
+      },
     });
-    
+
     if (existingMember) {
-      console.log(`Member ${data.user_id} already exists in workspace ${data.organization_id}`);
+      console.log(
+        `Member ${data.user_id} already exists in workspace ${data.organization_id}`
+      );
       return;
     }
-    
+
     await prisma.workspaceMember.create({
       data: {
         userId: data.user_id,
         workspaceId: data.organization_id,
-        role: String(data.role.name).toUpperCase(),
+        role: normalizeWorkspaceRole(data.role?.name),
       },
     });
   }
