@@ -55,8 +55,8 @@ function WorkspaceDropdown() {
       >
         <div className="flex items-center gap-3">
           <img
-            src={assets.workspace_img_default}
-            alt="workspace default"
+            src={currentWorkspace?.image_url || assets.workspace_img_default}
+            alt={currentWorkspace?.name || "workspace"}
             className="w-8 h-8 rounded shadow"
           />
           <div className="min-w-0 flex-1">
