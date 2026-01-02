@@ -96,19 +96,10 @@ Response back to Client
 
 ```
 
-## 🔐 Security & Best Practices
-- Role-based access control  
-- Protected routes using authentication middleware  
-- Secure handling of environment variables  
-- Server-side input validation  
-- Email-based invitation workflow  
-
 ---
 
 ## 🚧 Future Enhancements
-- Advanced analytics and reporting  
-- Notifications and reminders  
-- Activity logs  
+- Advanced analytics and reporting
 - Performance optimizations  
 - Fine-grained permissions at task level  
 
