@@ -1,83 +1,65 @@
+# Groop – Project Management Platform
 
+**Groop** is a scalable **PERN-stack project management platform** designed for multi-workspace collaboration, structured task tracking, and productivity analytics.
 
-#  Groop – Project Management Platform
-
-Groop is a scalable project management web application that enables teams to collaborate efficiently across multiple isolated workspaces. Each workspace maintains its own projects, tasks, analytics, and members, ensuring clear separation and structured collaboration.
-
-The platform supports end-to-end project and task management, role-based access control, and analytics dashboards to help teams track productivity and progress using data-driven insights.
+Each workspace operates in isolation with its own projects, tasks, members, and analytics—ensuring clean separation of data and efficient team workflows.
 
 ---
 
 ## 📌 Overview
 
-Groop is designed for teams that require:
-- Structured collaboration across multiple projects
-- Clear role-based responsibilities
-- Visibility into project progress and team performance
+Groop is built for teams that require:
+- Multi-workspace collaboration with strict data isolation
+- Role-based project and task ownership
+- Real-time visibility into progress and team performance
 
-Key objectives of the project:
-- Scalable backend architecture
-- Efficient relational database design
-- Secure authentication and authorization
-- Clean, responsive, and user-friendly interface
+### Project Objectives
+- Design a scalable backend architecture
+- Implement efficient relational data models
+- Enforce secure authentication and authorization
+- Deliver a responsive, user-friendly frontend
 
 ---
 
 ## ✨ Core Features
 
 ### 🏢 Multiple Workspaces
-- Create and manage multiple independent workspaces
-- Each workspace contains its own projects, tasks, and members
-- Full isolation between workspaces
+- Independent workspaces with isolated data
+- Workspace-level members, projects, and analytics
 
-### 📁 Project Management
-- Create, update, and manage projects within a workspace
-- Assign team members to projects
-- Track project-level progress and status
-
-### ✅ Task Management
-- Assign tasks to team members
-- Set due dates and priorities
-- Update task status (To Do / In Progress / Completed)
-- Track task ownership and deadlines
+### 📁 Project & Task Management
+- Create and manage projects within workspaces
+- Assign tasks, set due dates, and track statuses
+- Ownership-based task visibility
 
 ### 👥 User & Role Management
-- Invite team members via email
+- Email-based team invitations
 - Role-based access control (Admin / Member)
-- Manage workspace members and permissions
-- View user activity within projects
+- Workspace-level permission handling
 
 ### 📊 Analytics Dashboard
-- Project completion rates
+- Project completion metrics
 - Task progress visualization
-- Team size insights
-- Productivity-focused metrics for decision-making
+- Team size and productivity insights
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
+**Frontend**
 - React.js
 - Tailwind CSS
-- HTML5
-- JavaScript
 
-### Backend
+**Backend**
 - Node.js
 - Express.js
 - PostgreSQL
 - Prisma ORM
 
-### Authentication & Services
+**Services**
 - Clerk (Authentication & Organizations)
 - Neon (Serverless PostgreSQL)
-- Nodemailer.js (Email Invitations)
-
-### Tools
-- Git & GitHub
-- Postman
-- Vercel / Railway (Deployment)
+- Nodemailer.js (Email invitations)
 
 ---
 
@@ -92,8 +74,7 @@ Prisma ORM
    ↓
 PostgreSQL (Neon)
    ↓
-Response back to Client
-
+Client Response
 ```
 
 ---
